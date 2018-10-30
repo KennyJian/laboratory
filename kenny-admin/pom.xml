@@ -3,14 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.stylefeng</groupId>
-        <artifactId>guns-parent</artifactId>
+        <groupId>com.kenny</groupId>
+        <artifactId>kenny-laboratory-parent</artifactId>
         <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>guns-admin</artifactId>
-    <name>guns-admin</name>
+    <artifactId>kenny-admin</artifactId>
+    <name>kenny-admin</name>
     <description>guns 的spring boot版本</description>
 
     <packaging>jar</packaging>
@@ -18,12 +18,12 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.stylefeng</groupId>
-            <artifactId>guns-core</artifactId>
+            <groupId>com.kenny</groupId>
+            <artifactId>kenny-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.stylefeng</groupId>
-            <artifactId>guns-generator</artifactId>
+            <groupId>com.kenny</groupId>
+            <artifactId>kenny-generator</artifactId>
         </dependency>
 
         <!--spring boot依赖-->
@@ -128,7 +128,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <fork>false</fork><!-- 如果没有该项配置，肯呢个devtools不会起作用，即应用不会restart -->
+                    <fork>true</fork><!-- 如果没有该项配置，肯呢个devtools不会起作用，即应用不会restart -->
                 </configuration>
             </plugin>
         </plugins>

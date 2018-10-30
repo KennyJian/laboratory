@@ -1,18 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.stylefeng</groupId>
-    <artifactId>guns-parent</artifactId>
+    <groupId>com.kenny</groupId>
+    <artifactId>kenny-laboratory-parent</artifactId>
     <version>1.0.0</version>
 
-    <name>guns-parent</name>
+    <name>kenny-laboratory-parent</name>
     <packaging>pom</packaging>
 
     <modules>
-        <module>guns-admin</module>
-        <module>guns-core</module>
-        <module>guns-rest</module>
-        <module>guns-generator</module>
+        <module>kenny-admin</module>
+        <module>kenny-core</module>
+        <module>kenny-rest</module>
+        <module>kenny-generator</module>
     </modules>
 
     <parent>
@@ -47,13 +47,13 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.stylefeng</groupId>
-                <artifactId>guns-generator</artifactId>
+                <groupId>com.kenny</groupId>
+                <artifactId>kenny-generator</artifactId>
                 <version>${guns.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.stylefeng</groupId>
-                <artifactId>guns-core</artifactId>
+                <groupId>com.kenny</groupId>
+                <artifactId>kenny-core</artifactId>
                 <version>${guns.version}</version>
             </dependency>
 

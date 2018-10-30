@@ -1,0 +1,6 @@
+# AutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.kenny.laboratory.core.base.controller.GlobalController,\
+com.kenny.laboratory.core.config.DefaultFastjsonConfig,\
+com.kenny.laboratory.core.config.DefaultProperties,\
+com.kenny.laboratory.core.config.DefaultWebConfig

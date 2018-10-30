@@ -22,7 +22,7 @@
             <appender-ref ref="STDOUT"/>
         </root>
 
-        <logger name="com.stylefeng.guns" level="debug" additivity="false">
+        <logger name="com.kenny.laboratory" level="debug" additivity="false">
             <appender-ref ref="STDOUT"/>
         </logger>
 

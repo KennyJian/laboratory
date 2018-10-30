@@ -19,7 +19,7 @@ spring:
   devtools:
     restart:
       enabled: false
-      additional-paths: guns-admin/src/main/java,guns-core/src/main/java
+      additional-paths: kenny-admin/src/main/java,kenny-core/src/main/java
       exclude: static/**,WEB-INF/view/**
   servlet:
     multipart:
@@ -27,10 +27,10 @@ spring:
       max-file-size: 100MB
 
 mybatis-plus:
-  typeAliasesPackage: com.stylefeng.guns.modular.system.model
+  typeAliasesPackage: com.kenny.laboratory.modular.system.model
 
 log:
-  path: guns-logs
+  path: laboratory-logs
 
 ---
 
