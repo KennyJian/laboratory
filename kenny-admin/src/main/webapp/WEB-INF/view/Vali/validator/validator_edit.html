@@ -1,0 +1,29 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="ValidatorInfoForm">
+
+            <input id="id" value="${item.id}" type="hidden"/>
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="orderName" name="订单名字" value="${item.orderName}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="orderFrom" name="订单发货地" value="${item.orderFrom}" underline="true"/>
+                            <#input id="orderLeft" name="订单剩余量" value="${item.orderLeft}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="ValidatorInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="ValidatorInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/Vali/validator/validator_info.js"></script>
+@}
