@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kenny.laboratory.modular.system.dao.LaboratoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kenny.laboratory.modular.system.model.Laboratory">
+        <id column="laboratory_id" property="laboratoryId" />
+        <result column="laboratory_name" property="laboratoryName" />
+        <result column="laboratory_location" property="laboratoryLocation" />
+        <result column="laboratory_equipment_num" property="laboratoryEquipmentNum" />
+        <result column="is_open" property="isOpen" />
+        <result column="is_electrify" property="isElectrify" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        laboratory_id, laboratory_name, laboratory_location, laboratory_equipment_num, is_open, is_electrify
+    </sql>
+
+</mapper>

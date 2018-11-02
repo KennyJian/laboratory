@@ -1,0 +1,31 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="ExperimentInfoForm">
+
+            <input id="experimentId" value="${item.experimentId}" type="hidden"/>
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="experimentName" name="实验名" value="${item.experimentName}" underline="true"/>
+                            <#input id="courseId" name="课程号" value="${item.courseId}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="courseNum" name="实验课时" value="${item.courseNum}" underline="true"/>
+                            <#input id="equipmentNeedNum" name="实验所需设备" value="${item.equipmentNeedNum}" underline="true"/>
+                            <#input id="teacherId" name="老师用户ID" value="${item.teacherId}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="ExperimentInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="ExperimentInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/laboratory/experiment/experiment_info.js"></script>
+@}

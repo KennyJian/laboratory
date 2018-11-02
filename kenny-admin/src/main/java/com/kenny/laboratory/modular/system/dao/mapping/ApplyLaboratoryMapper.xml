@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kenny.laboratory.modular.system.dao.ApplyLaboratoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kenny.laboratory.modular.system.model.ApplyLaboratory">
+        <id column="id" property="id" />
+        <result column="experiment_id" property="experimentId" />
+        <result column="laboratory_id" property="laboratoryId" />
+        <result column="experiment_name" property="experimentName" />
+        <result column="laboratory_name" property="laboratoryName" />
+        <result column="apply_begin_time" property="applyBeginTime" />
+        <result column="apply_end_time" property="applyEndTime" />
+        <result column="status" property="status" />
+        <result column="comment" property="comment" />
+        <result column="teacher_id" property="teacherId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, experiment_id, laboratory_id, experiment_name, laboratory_name, apply_begin_time, apply_end_time, status, comment, teacher_id
+    </sql>
+
+</mapper>

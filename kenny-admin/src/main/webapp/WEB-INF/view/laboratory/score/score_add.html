@@ -1,0 +1,33 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="ScoreInfoForm">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="studentId" name="学生id" underline="true"/>
+                            <#input id="experimentId" name="实验id" underline="true"/>
+                            <#input id="studentName" name="学生名" underline="true"/>
+                            <#input id="experimentName" name="实验名"/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="attendanceNum" name="到勤数" underline="true"/>
+                            <#input id="score" name="成绩" underline="true"/>
+                            <#input id="teacherName" name="老师名字" underline="true"/>
+                            <#input id="teacherId" name="老师id" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="ScoreInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="ScoreInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/laboratory/score/score_info.js"></script>
+@}

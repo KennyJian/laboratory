@@ -1,0 +1,32 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="ApplyExperimentInfoForm">
+
+            <input id="id" value="${item.id}" type="hidden"/>
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="experimentId" name="实验id" value="${item.experimentId}" underline="true"/>
+                            <#input id="studentName" name="学生名" value="${item.studentName}" underline="true"/>
+                            <#input id="experimentName" name="实验名" value="${item.experimentName}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="status" name="状态 0:待审核 1:成功 2:失败" value="${item.status}" underline="true"/>
+                            <#input id="studentId" name="学生id" value="${item.studentId}" underline="true"/>
+                            <#input id="teacherId" name="老师id" value="${item.teacherId}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="ApplyExperimentInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="ApplyExperimentInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/laboratory/applyExperiment/applyExperiment_info.js"></script>
+@}
