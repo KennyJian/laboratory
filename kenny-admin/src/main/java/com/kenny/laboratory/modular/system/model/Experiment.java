@@ -35,7 +35,7 @@ public class Experiment extends Model<Experiment> {
      * 课程号
      */
     @TableField("course_id")
-    private Long courseId;
+    private String courseId;
     /**
      * 实验课时
      */
@@ -69,11 +69,11 @@ public class Experiment extends Model<Experiment> {
         this.experimentName = experimentName;
     }
 
-    public Long getCourseId() {
+    public String getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Long courseId) {
+    public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
 

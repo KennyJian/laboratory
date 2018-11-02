@@ -1,25 +1,25 @@
-package com.kenny.laboratory.modular.laboratory.controller;
+package com.kenny.laboratory.modular.laboratory.controller.teacher;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.kenny.laboratory.core.base.controller.BaseController;
-import com.kenny.laboratory.modular.laboratory.labenum.OpenEnum;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.kenny.laboratory.core.log.LogObjectHolder;
-import org.springframework.web.bind.annotation.RequestParam;
 import com.kenny.laboratory.core.common.annotion.Permission;
 import com.kenny.laboratory.core.common.exception.BizExceptionEnum;
 import com.kenny.laboratory.core.exception.GunsException;
-import org.springframework.validation.BindingResult;
-import javax.validation.Valid;
+import com.kenny.laboratory.core.log.LogObjectHolder;
 import com.kenny.laboratory.core.shiro.ShiroKit;
 import com.kenny.laboratory.core.util.ToolUtil;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.kenny.laboratory.modular.system.model.Experiment;
 import com.kenny.laboratory.modular.laboratory.service.IExperimentService;
+import com.kenny.laboratory.modular.system.model.Experiment;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.validation.Valid;
 
 /**
  * 实验管理控制器
@@ -28,10 +28,10 @@ import com.kenny.laboratory.modular.laboratory.service.IExperimentService;
  * @Date 2018-11-02 15:01:21
  */
 @Controller
-@RequestMapping("/experiment")
-public class ExperimentController extends BaseController {
+@RequestMapping("/teacher/experiment")
+public class TeacherController extends BaseController {
 
-    private String PREFIX = "/laboratory/experiment/";
+    private String PREFIX = "/laboratory/teacher/experiment/";
 
     @Autowired
     private IExperimentService experimentService;
