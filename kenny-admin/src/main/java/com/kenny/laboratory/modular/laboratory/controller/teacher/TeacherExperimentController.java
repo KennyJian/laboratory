@@ -29,7 +29,7 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping("/teacher/experiment")
-public class TeacherController extends BaseController {
+public class TeacherExperimentController extends BaseController {
 
     private String PREFIX = "/laboratory/teacher/experiment/";
 
@@ -71,31 +71,17 @@ public class TeacherController extends BaseController {
     @Permission
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(    @RequestParam(required = false) String experimentId,
+    public Object list(
     @RequestParam(required = false) String experimentName,
-    @RequestParam(required = false) String courseId,
-    @RequestParam(required = false) String courseNum,
-    @RequestParam(required = false) String equipmentNeedNum,
-    @RequestParam(required = false) String teacherId){
+    @RequestParam(required = false) String courseId){
         EntityWrapper<Experiment> entityWrapper=new EntityWrapper<>();
-        if(ToolUtil.isNotEmpty(experimentId)){
-            entityWrapper.like("experimentId",experimentId);
-        }
         if(ToolUtil.isNotEmpty(experimentName)){
-            entityWrapper.like("experimentName",experimentName);
+            entityWrapper.like("experiment_name",experimentName);
         }
         if(ToolUtil.isNotEmpty(courseId)){
-            entityWrapper.like("courseId",courseId);
+            entityWrapper.like("course_id",courseId);
         }
-        if(ToolUtil.isNotEmpty(courseNum)){
-            entityWrapper.like("courseNum",courseNum);
-        }
-        if(ToolUtil.isNotEmpty(equipmentNeedNum)){
-            entityWrapper.like("equipmentNeedNum",equipmentNeedNum);
-        }
-        if(ToolUtil.isNotEmpty(teacherId)){
-            entityWrapper.like("teacherId",teacherId);
-        }
+        entityWrapper.in("teacher_id",ShiroKit.getUser().getId().toString());
         return experimentService.selectList(entityWrapper);
     }
 

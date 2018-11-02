@@ -1,0 +1,37 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="LaboratoryInfoForm">
+
+            <input id="laboratoryId" value="${item.laboratoryId}" type="hidden"/>
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="laboratoryName" name="实验室名字" value="${item.laboratoryName}" underline="true"/>
+                            <#input id="laboratoryLocation" name="实验室地点" value="${item.laboratoryLocation}" />
+                </div>
+
+                <div class="col-sm-6">
+                    <#input id="laboratoryEquipmentNum" name="实验室设备数" value="${item.laboratoryEquipmentNum}" underline="true"/>
+                    <#select id="isOpen" name="实验室开放" underline="true" value="${item.isOpen}" underline="true">
+                        <option value="1">开放</option>
+                        <option value="2">未开放</option>
+                    </#select>
+                    <#select id="isElectrify" name="实验室通电情况" value="${item.isElectrify}">
+                        <option value="1">通电</option>
+                        <option value="2">不通电</option>
+                    </#select>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="LaboratoryInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="LaboratoryInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/laboratory/admin/laboratory/laboratory_info.js"></script>
+@}

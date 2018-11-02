@@ -15,9 +15,9 @@ public enum AuditingEnum {
     }
 
     public static String getMsg(int code){
-        for(OpenEnum openEnum:OpenEnum.values()){
-            if(openEnum.getCode()==code){
-                return openEnum.getMsg();
+        for(AuditingEnum auditingEnum:AuditingEnum.values()){
+            if(auditingEnum.getCode()==code){
+                return auditingEnum.getMsg();
             }
         }
         return null;

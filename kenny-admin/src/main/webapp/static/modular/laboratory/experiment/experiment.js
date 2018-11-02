@@ -101,7 +101,7 @@ Experiment.search = function () {
 
 $(function () {
     var defaultColunms = Experiment.initColumn();
-    var table = new BSTable(Experiment.id, "/experiment/list", defaultColunms);
+    var table = new BSTable(Experiment.id, "/teacher/experiment/list", defaultColunms);
     table.setPaginationType("client");
     Experiment.table = table.init();
 });

@@ -3,7 +3,7 @@ package com.kenny.laboratory.modular.laboratory.labenum;
 public enum ElectrifyEnum {
 
     OPEN(1,"通电"),
-    CLOSE(2,"不通电");
+    CLOSE(2,"未通电");
 
     int code;
     String msg;
@@ -14,9 +14,9 @@ public enum ElectrifyEnum {
     }
 
     public static String getMsg(int code){
-        for(OpenEnum openEnum:OpenEnum.values()){
-            if(openEnum.getCode()==code){
-                return openEnum.getMsg();
+        for(ElectrifyEnum electrifyEnum:ElectrifyEnum.values()){
+            if(electrifyEnum.getCode()==code){
+                return electrifyEnum.getMsg();
             }
         }
         return null;
