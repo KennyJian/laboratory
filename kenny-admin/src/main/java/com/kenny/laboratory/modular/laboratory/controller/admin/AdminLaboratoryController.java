@@ -7,7 +7,7 @@ import com.kenny.laboratory.core.common.exception.BizExceptionEnum;
 import com.kenny.laboratory.core.exception.GunsException;
 import com.kenny.laboratory.core.log.LogObjectHolder;
 import com.kenny.laboratory.core.util.ToolUtil;
-import com.kenny.laboratory.modular.laboratory.controller.admin.dto.LaboratoryDTO;
+import com.kenny.laboratory.modular.laboratory.dto.admin.LaboratoryShowDTO;
 import com.kenny.laboratory.modular.laboratory.labenum.ElectrifyEnum;
 import com.kenny.laboratory.modular.laboratory.labenum.OpenEnum;
 import com.kenny.laboratory.modular.laboratory.service.ILaboratoryService;
@@ -100,15 +100,15 @@ public class AdminLaboratoryController extends BaseController {
         }
 
         List<Laboratory> laboratoryList=laboratoryService.selectList(entityWrapper);
-        List<LaboratoryDTO> laboratoryDTOList=new ArrayList<>();
+        List<LaboratoryShowDTO> laboratoryShowDTOList =new ArrayList<>();
         for(Laboratory laboratory:laboratoryList){
-            LaboratoryDTO laboratoryDTO=new LaboratoryDTO();
-            BeanUtils.copyProperties(laboratory,laboratoryDTO);
-            laboratoryDTO.setIsOpen(OpenEnum.getMsg(laboratory.getIsOpen()));
-            laboratoryDTO.setIsElectrify(ElectrifyEnum.getMsg(laboratory.getIsElectrify()));
-            laboratoryDTOList.add(laboratoryDTO);
+            LaboratoryShowDTO laboratoryShowDTO =new LaboratoryShowDTO();
+            BeanUtils.copyProperties(laboratory, laboratoryShowDTO);
+            laboratoryShowDTO.setIsOpen(OpenEnum.getMsg(laboratory.getIsOpen()));
+            laboratoryShowDTO.setIsElectrify(ElectrifyEnum.getMsg(laboratory.getIsElectrify()));
+            laboratoryShowDTOList.add(laboratoryShowDTO);
         }
-        return laboratoryDTOList;
+        return laboratoryShowDTOList;
     }
 
     /**

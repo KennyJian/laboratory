@@ -104,31 +104,7 @@ LaboratoryInfoDlg.collectData = function() {
 }
 
 /**
- * 提交添加
- */
-LaboratoryInfoDlg.addSubmit = function() {
-
-    this.clearData();
-    this.collectData();
-
-    if (!this.validate()) {
-        return;
-    }
-
-    //提交信息
-    var ajax = new $ax(Feng.ctxPath + "/laboratory/add", function(data){
-        Feng.success("添加成功!");
-        window.parent.Laboratory.table.refresh();
-        LaboratoryInfoDlg.close();
-    },function(data){
-        Feng.error("添加失败!" + data.responseJSON.message + "!");
-    });
-    ajax.set(this.laboratoryInfoData);
-    ajax.start();
-}
-
-/**
- * 提交修改
+ * 提交申请
  */
 LaboratoryInfoDlg.editSubmit = function() {
 
@@ -140,12 +116,12 @@ LaboratoryInfoDlg.editSubmit = function() {
     }
 
     //提交信息
-    var ajax = new $ax(Feng.ctxPath + "/laboratory/update", function(data){
-        Feng.success("修改成功!");
+    var ajax = new $ax(Feng.ctxPath + "/teacher/laboratory/apply", function(data){
+        Feng.success("申请成功!");
         window.parent.Laboratory.table.refresh();
         LaboratoryInfoDlg.close();
     },function(data){
-        Feng.error("修改失败!" + data.responseJSON.message + "!");
+        Feng.error("申请失败!" + data.responseJSON.message + "!");
     });
     ajax.set(this.laboratoryInfoData);
     ajax.start();

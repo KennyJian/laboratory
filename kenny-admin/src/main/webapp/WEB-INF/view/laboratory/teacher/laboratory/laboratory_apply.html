@@ -1,0 +1,42 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="LaboratoryInfoForm">
+
+            <input id="laboratoryId" value="${item.laboratoryId}" type="hidden"/>
+            <input id="laboratoryName" value="${item.laboratoryName}" type="hidden"/>
+            <input id="laboratoryLocation" value="${item.laboratoryLocation}" type="hidden"/>
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#select id="experimentName" name="实验名字" >
+                    @for(experiment in experimentList){
+                        <option value="${experiment.experimentId}">${experiment.experimentName}</option>
+                    @}
+                    </#select>
+                </div>
+                <div class="col-sm-6">
+                    <#input id="applyBeginTime" name="申请使用时间" underline="true"/>
+                    <#input id="applyEndTime" name="申请结束时间"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="LaboratoryInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="LaboratoryInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/laboratory/teacher/laboratory/laboratory_info.js"></script>
+<script>
+    laydate.render({
+        elem:'#applyBeginTime'
+    });
+    laydate.render({
+        elem:'#applyEndTime'
+    });
+</script>
+@}

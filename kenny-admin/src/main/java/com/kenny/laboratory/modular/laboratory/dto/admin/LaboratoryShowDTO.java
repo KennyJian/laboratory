@@ -1,4 +1,4 @@
-package com.kenny.laboratory.modular.laboratory.controller.admin.dto;
+package com.kenny.laboratory.modular.laboratory.dto.admin;
 
 
 /**
@@ -9,7 +9,7 @@ package com.kenny.laboratory.modular.laboratory.controller.admin.dto;
  * @author kenny
  * @since 2018-11-02
  */
-public class LaboratoryDTO{
+public class LaboratoryShowDTO {
 
 
     private Long laboratoryId;

@@ -12,13 +12,23 @@
 
                 <div class="col-sm-6">
                     <#input id="laboratoryEquipmentNum" name="实验室设备数" value="${item.laboratoryEquipmentNum}" underline="true"/>
-                    <#select id="isOpen" name="实验室开放" underline="true" value="${item.isOpen}" underline="true">
+                    <#select id="isOpen" name="实验室开放" underline="true" underline="true">
+                    @if(item.isOpen==1){
                         <option value="1">开放</option>
                         <option value="2">未开放</option>
+                    @}else{
+                        <option value="2">未开放</option>
+                        <option value="1">开放</option>
+                    @}
                     </#select>
-                    <#select id="isElectrify" name="实验室通电情况" value="${item.isElectrify}">
+                    <#select id="isElectrify" name="实验室通电情况">
+                    @if(item.isElectrify==1){
                         <option value="1">通电</option>
                         <option value="2">不通电</option>
+                    @}else{
+                        <option value="2">不通电</option>
+                        <option value="1">通电</option>
+                    @}
                     </#select>
                 </div>
             </div>

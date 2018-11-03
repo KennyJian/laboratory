@@ -1,0 +1,38 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>实验室管理管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#NameCon id="laboratoryName" name="实验室名字" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="laboratoryLocation" name="实验室地点" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="laboratoryEquipmentNum" name="实验室设备数" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="Laboratory.search()"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="LaboratoryTableToolbar" role="group">
+                            @if(shiro.hasPermission("/teacher/laboratory/apply")){
+                                <#button name="申请" icon="fa-plus" clickFun="Laboratory.openLaboratoryApply()"/>
+                            @}
+                        </div>
+                        <#table id="LaboratoryTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/laboratory/teacher/laboratory/laboratory.js"></script>
+@}
