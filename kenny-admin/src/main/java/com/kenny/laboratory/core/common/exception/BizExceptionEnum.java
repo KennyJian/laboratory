@@ -80,7 +80,13 @@ public enum BizExceptionEnum implements ServiceExceptionEnum {
     /**
      * 申请结束时间不能小于开始时间
      */
-    CHOOSE_DARA_ERROR(500,"申请结束时间不能小于开始时间");
+    CHOOSE_DARA_ERROR(500,"申请结束时间不能小于开始时间"),
+
+
+    /**
+     * 该时间段已被占用
+     */
+    CHOOSE_DARA_OCCUPIED(500,"该时间段已被占用");
 
     BizExceptionEnum(int code, String message) {
         this.code = code;

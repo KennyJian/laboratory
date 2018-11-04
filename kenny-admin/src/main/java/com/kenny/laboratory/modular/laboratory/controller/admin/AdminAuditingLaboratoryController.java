@@ -85,10 +85,10 @@ public class AdminAuditingLaboratoryController extends BaseController {
             entityWrapper.like("laboratory_name",laboratoryName);
         }
         if(ToolUtil.isNotEmpty(applyBeginTime)){
-            entityWrapper.like("apply_begin_time",applyBeginTime);
+            entityWrapper.gt("apply_begin_time",applyBeginTime);
         }
         if(ToolUtil.isNotEmpty(applyEndTime)){
-            entityWrapper.like("apply_end_time",applyEndTime);
+            entityWrapper.lt("apply_end_time",applyEndTime);
         }
         if(ToolUtil.isNotEmpty(status)){
             entityWrapper.eq("status",status);

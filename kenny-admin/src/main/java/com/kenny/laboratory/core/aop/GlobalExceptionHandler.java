@@ -10,6 +10,7 @@ import com.kenny.laboratory.core.log.LogManager;
 import com.kenny.laboratory.core.shiro.ShiroKit;
 import com.kenny.laboratory.modular.laboratory.exception.ChooseDataException;
 import com.kenny.laboratory.modular.laboratory.exception.EquipmentNotEnoughException;
+import com.kenny.laboratory.modular.laboratory.exception.LaboratoryOccupiedException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.CredentialsException;
 import org.apache.shiro.authc.DisabledAccountException;
@@ -126,6 +127,18 @@ public class GlobalExceptionHandler {
         log.error("申请结束时间不能小于开始时间!", e);
         return new ErrorTip(BizExceptionEnum.CHOOSE_DARA_ERROR.getCode(), BizExceptionEnum.CHOOSE_DARA_ERROR.getMessage());
     }
+
+
+    @ExceptionHandler(LaboratoryOccupiedException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    public ErrorTip laboratoryOccupied(LaboratoryOccupiedException e){
+        HttpKit.getRequest().setAttribute("tip", "该时间段已被占用");
+        log.error("该时间段已被占用!", e);
+        return new ErrorTip(BizExceptionEnum.CHOOSE_DARA_OCCUPIED.getCode(), BizExceptionEnum.CHOOSE_DARA_OCCUPIED.getMessage());
+    }
+
+
     /**
      * 拦截未知的运行时异常
      */
