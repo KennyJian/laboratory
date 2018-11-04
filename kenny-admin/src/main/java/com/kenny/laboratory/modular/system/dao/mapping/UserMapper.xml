@@ -74,4 +74,9 @@
 		from sys_user where account = #{account} and status != 3
 	</select>
 
+	<select id="getNameById" parameterType="Integer" resultType="String">
+		select
+		name
+		from sys_user where id = #{userId}
+	</select>
 </mapper>

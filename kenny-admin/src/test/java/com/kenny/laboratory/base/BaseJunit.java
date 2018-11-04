@@ -1,6 +1,6 @@
 package com.kenny.laboratory.base;
 
-import com.kenny.laboratory.GunsApplication;
+import com.kenny.laboratory.LaboratoryApplication;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
  * @Date 2017/5/21 16:10
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = GunsApplication.class)
+@SpringBootTest(classes = LaboratoryApplication.class)
 @WebAppConfiguration
 //@Transactional //打开的话测试之后数据可自动回滚
 public class BaseJunit {

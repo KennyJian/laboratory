@@ -9,10 +9,10 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * @author fengshuonan
  * @date 2017-05-21 9:43
  */
-public class GunsServletInitializer extends SpringBootServletInitializer {
+public class LaboratoryServletInitializer extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(GunsApplication.class);
+        return builder.sources(LaboratoryApplication.class);
     }
 }

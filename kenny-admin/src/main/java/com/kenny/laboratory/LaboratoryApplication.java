@@ -12,12 +12,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Date 2018/10/30 12:06
  */
 @SpringBootApplication
-public class GunsApplication {
+public class LaboratoryApplication {
 
-    private final static Logger logger = LoggerFactory.getLogger(GunsApplication.class);
+    private final static Logger logger = LoggerFactory.getLogger(LaboratoryApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(GunsApplication.class, args);
+        SpringApplication.run(LaboratoryApplication.class, args);
         logger.info("江苏科技大学实验室预约管理系统启动成功");
     }
 }

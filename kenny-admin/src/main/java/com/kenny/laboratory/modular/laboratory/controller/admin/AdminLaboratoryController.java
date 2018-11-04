@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * 实验室管理控制器
  *
- * @author fengshuonan
+ * @author kenny
  * @Date 2018-11-02 15:02:29
  */
 @Controller

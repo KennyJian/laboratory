@@ -3,8 +3,8 @@ package com.kenny.laboratory.modular.laboratory.labenum;
 public enum AuditingEnum {
 
     WAIT(0,"待审核"),
-    SUCCESS(1,"成功"),
-    FAIL(2,"失败");
+    SUCCESS(1,"通过"),
+    FAIL(2,"不通过");
 
     int code;
     String msg;

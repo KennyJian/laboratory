@@ -24,7 +24,7 @@ import javax.validation.Valid;
 /**
  * 实验管理控制器
  *
- * @author fengshuonan
+ * @author kenny
  * @Date 2018-11-02 15:01:21
  */
 @Controller
@@ -81,7 +81,7 @@ public class TeacherExperimentController extends BaseController {
         if(ToolUtil.isNotEmpty(courseId)){
             entityWrapper.like("course_id",courseId);
         }
-        entityWrapper.in("teacher_id",ShiroKit.getUser().getId().toString());
+        entityWrapper.eq("teacher_id",ShiroKit.getUser().getId().toString());
         return experimentService.selectList(entityWrapper);
     }
 

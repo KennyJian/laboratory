@@ -1,7 +1,7 @@
 package com.kenny.laboratory.modular.code.factory;
 
 
-import com.kenny.laboratory.GunsApplication;
+import com.kenny.laboratory.LaboratoryApplication;
 import com.kenny.laboratory.core.CoreFlag;
 import com.kenny.laboratory.core.util.ToolUtil;
 import com.kenny.laboratory.generator.action.model.GenQo;
@@ -44,7 +44,7 @@ public class DefaultTemplateFactory {
         GenQo genQo = new GenQo();
         genQo.setProjectPath(ToolUtil.getWebRootPath(null));
         genQo.setAuthor("kenny");
-        genQo.setProjectPackage(GunsApplication.class.getPackage().getName());
+        genQo.setProjectPackage(LaboratoryApplication.class.getPackage().getName());
         genQo.setCorePackage(CoreFlag.class.getPackage().getName());
         genQo.setIgnoreTabelPrefix("sys_");
         genQo.setModuleName("system");
