@@ -8,7 +8,10 @@ import com.kenny.laboratory.core.exception.GunsException;
 import com.kenny.laboratory.core.log.LogObjectHolder;
 import com.kenny.laboratory.core.shiro.ShiroKit;
 import com.kenny.laboratory.core.util.ToolUtil;
+import com.kenny.laboratory.modular.laboratory.dto.teacher.ApplyLaboratoryDTO;
 import com.kenny.laboratory.modular.laboratory.dto.teacher.ExperimentApplyDTO;
+import com.kenny.laboratory.modular.laboratory.exception.ChooseDataException;
+import com.kenny.laboratory.modular.laboratory.exception.EquipmentNotEnoughException;
 import com.kenny.laboratory.modular.laboratory.service.IExperimentService;
 import com.kenny.laboratory.modular.laboratory.service.ILaboratoryService;
 import com.kenny.laboratory.modular.laboratory.service.teacher.ITeacherService;
@@ -104,11 +107,23 @@ public class TeacherLaboratoryController extends BaseController {
     @Permission
     @RequestMapping(value = "/apply")
     @ResponseBody
-    public Object add(@Valid Laboratory laboratory, BindingResult result) {
+    public Object apply(@Valid ApplyLaboratoryDTO applyLaboratoryDTO, BindingResult result) {
         if (result.hasErrors()) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
-        laboratoryService.insert(laboratory);
+
+        //时间选择异常
+        if(applyLaboratoryDTO.getApplyBeginTime().after(applyLaboratoryDTO.getApplyEndTime())){
+            throw new ChooseDataException();
+        }
+
+        //所选实验室设备不够异常
+        if(!teacherService.isEquipmentEnough(applyLaboratoryDTO)){
+            throw new EquipmentNotEnoughException();
+        }
+
+        teacherService.applyLaboratory(applyLaboratoryDTO);
+
         return SUCCESS_TIP;
     }
 

@@ -4,42 +4,24 @@
 var LaboratoryInfoDlg = {
     laboratoryInfoData : {},
     validateFields: {
-            laboratoryName: {
+            experimentId: {
                 validators: {
                     notEmpty: {
-                        message: '实验室名字不能为空'
+                        message: '实验名字不能为空'
                     }
                 }
             },
-            laboratoryLocation: {
+            applyBeginTime: {
                 validators: {
                     notEmpty: {
-                        message: '实验室地点不能为空'
+                        message: '申请开始时间不能为空'
                     }
                 }
             },
-            laboratoryEquipmentNum: {
+            applyEndTime: {
                 validators: {
                     notEmpty: {
-                        message: '实验室设备数不能为空'
-                    },
-                    regexp: {
-                        regexp: /^[0-9]+$/,
-                        message: '只能为整数'
-                    }
-                }
-            },
-            isOpen: {
-                validators: {
-                    notEmpty: {
-                        message: '实验室是否开放'
-                    }
-                }
-            },
-            isElectrify: {
-                validators: {
-                    notEmpty: {
-                        message: '实验室是否通电'
+                        message: '申请结束时间不能为空'
                     }
                 }
             }
@@ -97,10 +79,10 @@ LaboratoryInfoDlg.collectData = function() {
     this
     .set('laboratoryId')
     .set('laboratoryName')
-    .set('laboratoryLocation')
     .set('laboratoryEquipmentNum')
-    .set('isOpen')
-    .set('isElectrify');
+    .set('experimentId')
+    .set('applyBeginTime')
+    .set('applyEndTime');
 }
 
 /**

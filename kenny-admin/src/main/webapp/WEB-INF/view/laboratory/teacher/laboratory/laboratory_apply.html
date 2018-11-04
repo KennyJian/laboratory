@@ -5,10 +5,10 @@
 
             <input id="laboratoryId" value="${item.laboratoryId}" type="hidden"/>
             <input id="laboratoryName" value="${item.laboratoryName}" type="hidden"/>
-            <input id="laboratoryLocation" value="${item.laboratoryLocation}" type="hidden"/>
+            <input id="laboratoryEquipmentNum" value="${item.laboratoryEquipmentNum}" type="hidden"/>
             <div class="row">
                 <div class="col-sm-6 b-r">
-                    <#select id="experimentName" name="实验名字" >
+                    <#select id="experimentId" name="实验名字" >
                     @for(experiment in experimentList){
                         <option value="${experiment.experimentId}">${experiment.experimentName}</option>
                     @}

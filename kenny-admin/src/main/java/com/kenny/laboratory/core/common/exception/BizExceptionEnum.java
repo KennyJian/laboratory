@@ -69,8 +69,18 @@ public enum BizExceptionEnum implements ServiceExceptionEnum {
     /**
      * 其他
      */
-    AUTH_REQUEST_ERROR(400, "账号密码错误");
+    AUTH_REQUEST_ERROR(400, "账号密码错误"),
 
+    /**
+     * 申请实验室异常
+     */
+    EQUIPMENT_NOT_ENOUGH(500,"实验室设备不足"),
+
+
+    /**
+     * 申请结束时间不能小于开始时间
+     */
+    CHOOSE_DARA_ERROR(500,"申请结束时间不能小于开始时间");
 
     BizExceptionEnum(int code, String message) {
         this.code = code;

@@ -18,6 +18,6 @@ public class GunsApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(GunsApplication.class, args);
-        logger.info("GunsApplication is success!");
+        logger.info("江苏科技大学实验室预约管理系统启动成功");
     }
 }
