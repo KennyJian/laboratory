@@ -3,6 +3,7 @@ package com.kenny.laboratory.modular.laboratory.service.teacher.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.kenny.laboratory.core.shiro.ShiroKit;
 import com.kenny.laboratory.modular.laboratory.dto.teacher.ApplyLaboratoryDTO;
+import com.kenny.laboratory.modular.laboratory.dto.teacher.ApplyLaboratoryDetailDTO;
 import com.kenny.laboratory.modular.laboratory.dto.teacher.ExperimentApplyDTO;
 import com.kenny.laboratory.modular.laboratory.labenum.AuditingEnum;
 import com.kenny.laboratory.modular.laboratory.service.IApplyLaboratoryService;
@@ -77,5 +78,17 @@ public class ITeacherServiceImpl implements ITeacherService {
         }
 
         return false;
+    }
+
+    @Override
+    public List<ApplyLaboratoryDetailDTO> convertApplyLaboratoryToApplyLaboratoryDetailDTO(List<ApplyLaboratory> applyLaboratoryList) {
+        List<ApplyLaboratoryDetailDTO> applyLaboratoryDetailDTOList=new ArrayList<>();
+        for(ApplyLaboratory applyLaboratory:applyLaboratoryList){
+            ApplyLaboratoryDetailDTO applyLaboratoryDetailDTO=new ApplyLaboratoryDetailDTO();
+            BeanUtils.copyProperties(applyLaboratory,applyLaboratoryDetailDTO);
+            applyLaboratoryDetailDTO.setStatus(AuditingEnum.getMsg(applyLaboratory.getStatus()));
+            applyLaboratoryDetailDTOList.add(applyLaboratoryDetailDTO);
+        }
+        return applyLaboratoryDetailDTOList;
     }
 }

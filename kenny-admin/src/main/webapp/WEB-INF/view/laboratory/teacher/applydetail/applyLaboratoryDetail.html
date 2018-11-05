@@ -1,0 +1,54 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>实验室申请管理管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#NameCon id="experimentName" name="实验名" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="laboratoryName" name="实验室名" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="applyBeginTime" name="申请使用时间" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="applyEndTime" name="申请结束时间" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#select id="status" name="审核状态">
+                                    <option value=""></option>
+                                    <option value="0">待审核</option>
+                                    <option value="1">通过</option>
+                                    <option value="2">不通过</option>
+                                </#select>
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="ApplyLaboratory.search()"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="ApplyLaboratoryTableToolbar" role="group">
+                        </div>
+                        <#table id="ApplyLaboratoryTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/laboratory/teacher/applydetail/applyLaboratoryDetail.js"></script>
+<script>
+    laydate.render({
+        elem:'#applyBeginTime'
+    });
+    laydate.render({
+        elem:'#applyEndTime'
+    });
+</script>
+@}

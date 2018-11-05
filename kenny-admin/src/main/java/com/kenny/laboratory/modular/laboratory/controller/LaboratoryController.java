@@ -23,7 +23,7 @@ import com.kenny.laboratory.modular.laboratory.service.ILaboratoryService;
 /**
  * 实验室管理控制器
  *
- * @author fengshuonan
+ * @author kenny
  * @Date 2018-11-02 15:02:29
  */
 @Controller
