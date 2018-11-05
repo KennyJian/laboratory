@@ -21,4 +21,7 @@
         id, experiment_id, laboratory_id, experiment_name, laboratory_name, apply_begin_time, apply_end_time, status, comment, teacher_id
     </sql>
 
+    <select id="findExperimentIdByStatusSuccess" resultType="Long">
+        select distinct experiment_id from lab_apply_laboratory where status=1
+    </select>
 </mapper>

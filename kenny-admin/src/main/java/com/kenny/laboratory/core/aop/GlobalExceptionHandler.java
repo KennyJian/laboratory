@@ -11,6 +11,7 @@ import com.kenny.laboratory.core.shiro.ShiroKit;
 import com.kenny.laboratory.modular.laboratory.exception.ChooseDataException;
 import com.kenny.laboratory.modular.laboratory.exception.EquipmentNotEnoughException;
 import com.kenny.laboratory.modular.laboratory.exception.LaboratoryOccupiedException;
+import com.kenny.laboratory.modular.laboratory.exception.StudentRepeatApplyException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.CredentialsException;
 import org.apache.shiro.authc.DisabledAccountException;
@@ -138,6 +139,14 @@ public class GlobalExceptionHandler {
         return new ErrorTip(BizExceptionEnum.CHOOSE_DARA_OCCUPIED.getCode(), BizExceptionEnum.CHOOSE_DARA_OCCUPIED.getMessage());
     }
 
+    @ExceptionHandler(StudentRepeatApplyException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    public ErrorTip studentRepeatApply(StudentRepeatApplyException e){
+        HttpKit.getRequest().setAttribute("tip", "学生重复申请选课");
+        log.error("学生重复申请选课!", e);
+        return new ErrorTip(BizExceptionEnum.STUDENT_REPEAT_APPLY.getCode(), BizExceptionEnum.STUDENT_REPEAT_APPLY.getMessage());
+    }
 
     /**
      * 拦截未知的运行时异常

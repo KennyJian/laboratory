@@ -86,7 +86,10 @@ public enum BizExceptionEnum implements ServiceExceptionEnum {
     /**
      * 该时间段已被占用
      */
-    CHOOSE_DARA_OCCUPIED(500,"该时间段已被占用");
+    CHOOSE_DARA_OCCUPIED(500,"该时间段已被占用"),
+
+
+    STUDENT_REPEAT_APPLY(500,"学生重复申请选课");
 
     BizExceptionEnum(int code, String message) {
         this.code = code;
