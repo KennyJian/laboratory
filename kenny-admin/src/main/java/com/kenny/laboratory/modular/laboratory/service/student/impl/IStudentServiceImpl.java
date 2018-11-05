@@ -29,6 +29,21 @@ public class IStudentServiceImpl implements IStudentService {
     @Autowired
     private IApplyExperimentService applyExperimentService;
 
+    private boolean isAuditingSuccess(String experimentId){
+        Collection<Integer> collection=new ConcurrentLinkedDeque();
+        collection.add(AuditingEnum.SUCCESS.getCode());
+        collection.add(AuditingEnum.WAIT.getCode());
+        EntityWrapper<ApplyExperiment> applyExperimentEntityWrapper=new EntityWrapper<>();
+        applyExperimentEntityWrapper.eq("experiment_id",experimentId);
+        applyExperimentEntityWrapper.in("status",collection);
+        applyExperimentEntityWrapper.eq("student_id",ShiroKit.getUser().getId());
+        ApplyExperiment isapplyExperimentExist=applyExperimentService.selectOne(applyExperimentEntityWrapper);
+        if(isapplyExperimentExist!=null){
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public List<StundentApplyShowDTO> convertExperientToStundentApplyShowDTO(List<Experiment> experimentList) {
         List<StundentApplyShowDTO> stundentApplyShowDTOList=new ArrayList<>();
@@ -43,15 +58,8 @@ public class IStudentServiceImpl implements IStudentService {
 
     @Override
     public void insertToApplyExperiment(String experimentId, String experimentName, String teacherId) {
-        Collection<Integer> collection=new ConcurrentLinkedDeque();
-        collection.add(AuditingEnum.SUCCESS.getCode());
-        collection.add(AuditingEnum.WAIT.getCode());
-        EntityWrapper<ApplyExperiment> applyExperimentEntityWrapper=new EntityWrapper<>();
-        applyExperimentEntityWrapper.eq("experiment_id",experimentId);
-        applyExperimentEntityWrapper.in("status",collection);
-        applyExperimentEntityWrapper.eq("student_id",ShiroKit.getUser().getId());
-        ApplyExperiment isapplyExperimentExist=applyExperimentService.selectOne(applyExperimentEntityWrapper);
-        if(isapplyExperimentExist!=null){
+
+        if(isAuditingSuccess(experimentId)){
             throw new StudentRepeatApplyException();
         }
         //插入到申请表

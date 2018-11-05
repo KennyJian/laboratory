@@ -10,4 +10,5 @@ public interface IStudentService {
     List<StundentApplyShowDTO> convertExperientToStundentApplyShowDTO(List<Experiment> experimentList);
 
     void insertToApplyExperiment(String experimentId,String experimentName,String teacherId);
+
 }
