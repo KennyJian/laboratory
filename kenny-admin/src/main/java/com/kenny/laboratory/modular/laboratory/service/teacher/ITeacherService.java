@@ -28,4 +28,8 @@ public interface ITeacherService {
     void teacherGrade(Score score);
 
     boolean isAchieveAttendNum(Score score);
+
+    List<TacherSignInDTO> applyLaboratoryconvertToTacherSignInDTO(List<ApplyLaboratory> applyLaboratoryList);
+
+    void teacherSignIn(Long selectLaboratoryId,String pwd);
 }

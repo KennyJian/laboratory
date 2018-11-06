@@ -93,7 +93,9 @@ public enum BizExceptionEnum implements ServiceExceptionEnum {
 
     ATTEDN_MAX(500,"学生签到次数已达课程数"),
 
-    GRADE_NOT_ACHIEVE(500,"未达到评分条件");
+    GRADE_NOT_ACHIEVE(500,"未达到评分条件"),
+
+    PASSWORD_ERROR(500,"密码错误");
 
     BizExceptionEnum(int code, String message) {
         this.code = code;

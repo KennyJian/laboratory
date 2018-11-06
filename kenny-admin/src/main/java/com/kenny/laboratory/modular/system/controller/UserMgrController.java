@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * 系统管理员控制器
  *
- * @author fengshuonan
+ * @author kenny
  * @Date 2017年1月11日 下午1:08:17
  */
 @Controller

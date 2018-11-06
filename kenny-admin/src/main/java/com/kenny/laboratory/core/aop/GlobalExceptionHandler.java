@@ -163,6 +163,17 @@ public class GlobalExceptionHandler {
         log.error("未达到评分条件!", e);
         return new ErrorTip(BizExceptionEnum.GRADE_NOT_ACHIEVE.getCode(), BizExceptionEnum.GRADE_NOT_ACHIEVE.getMessage());
     }
+
+
+    @ExceptionHandler(ValidateException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    public ErrorTip validate(ValidateException e){
+        HttpKit.getRequest().setAttribute("tip", "密码错误");
+        log.error("密码错误!", e);
+        return new ErrorTip(BizExceptionEnum.PASSWORD_ERROR.getCode(), BizExceptionEnum.PASSWORD_ERROR.getMessage());
+    }
+
     /**
      * 拦截未知的运行时异常
      */

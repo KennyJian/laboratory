@@ -2,21 +2,24 @@ package com.kenny.laboratory.modular.laboratory.service.teacher.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.kenny.laboratory.core.shiro.ShiroKit;
+import com.kenny.laboratory.core.shiro.ShiroUser;
 import com.kenny.laboratory.modular.laboratory.dto.teacher.*;
 import com.kenny.laboratory.modular.laboratory.exception.GradeException;
 import com.kenny.laboratory.modular.laboratory.exception.StudentRepeatApplyException;
+import com.kenny.laboratory.modular.laboratory.exception.ValidateException;
 import com.kenny.laboratory.modular.laboratory.labenum.AuditingEnum;
-import com.kenny.laboratory.modular.laboratory.service.IApplyExperimentService;
-import com.kenny.laboratory.modular.laboratory.service.IApplyLaboratoryService;
-import com.kenny.laboratory.modular.laboratory.service.IExperimentService;
-import com.kenny.laboratory.modular.laboratory.service.IScoreService;
+import com.kenny.laboratory.modular.laboratory.labenum.ElectrifyEnum;
+import com.kenny.laboratory.modular.laboratory.service.*;
 import com.kenny.laboratory.modular.laboratory.service.student.IStudentService;
 import com.kenny.laboratory.modular.laboratory.service.teacher.ITeacherService;
+import com.kenny.laboratory.modular.laboratory.utils.ValidateUserUtil;
 import com.kenny.laboratory.modular.system.dao.UserMapper;
-import com.kenny.laboratory.modular.system.model.ApplyExperiment;
-import com.kenny.laboratory.modular.system.model.ApplyLaboratory;
-import com.kenny.laboratory.modular.system.model.Experiment;
-import com.kenny.laboratory.modular.system.model.Score;
+import com.kenny.laboratory.modular.system.model.*;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +46,9 @@ public class ITeacherServiceImpl implements ITeacherService {
 
     @Autowired
     private IStudentService studentService;
+
+    @Autowired
+    private ILaboratoryService laboratoryService;
 
     @Autowired
     private UserMapper userMapper;
@@ -216,6 +222,7 @@ public class ITeacherServiceImpl implements ITeacherService {
         //修改分数
         slectScore.setScore(score.getScore());
         scoreService.updateById(slectScore);
+
     }
 
     @Override
@@ -228,5 +235,49 @@ public class ITeacherServiceImpl implements ITeacherService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public List<TacherSignInDTO> applyLaboratoryconvertToTacherSignInDTO(List<ApplyLaboratory> applyLaboratoryList) {
+        List<TacherSignInDTO> tacherSignInDTOList=new ArrayList<>();
+        for(ApplyLaboratory applyLaboratory:applyLaboratoryList){
+            TacherSignInDTO tacherSignInDTO=new TacherSignInDTO();
+            BeanUtils.copyProperties(applyLaboratory,tacherSignInDTO);
+            Laboratory laboratory=laboratoryService.selectById(applyLaboratory.getLaboratoryId());
+            tacherSignInDTO.setIsElectrify(ElectrifyEnum.getMsg(laboratory.getIsElectrify()));
+            tacherSignInDTOList.add(tacherSignInDTO);
+        }
+        return tacherSignInDTOList;
+    }
+
+    @Override
+    @Transactional
+    public void teacherSignIn(Long selectLaboratoryId,String pwd) {
+        //验证密码是否正确
+        //封装请求账号密码为shiro可验证的token
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(ShiroKit.getUser().getAccount(), pwd.toCharArray());
+//        获取数据库中的账号密码，准备比对
+        User user = userMapper.getByAccount(ShiroKit.getUser().getAccount());
+        String credentials = user.getPassword();
+        String salt = user.getSalt();
+        ByteSource credentialsSalt = new Md5Hash(salt);
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
+                new ShiroUser(), credentials, credentialsSalt, "");
+
+        //校验用户账号密码
+        HashedCredentialsMatcher md5CredentialsMatcher = new HashedCredentialsMatcher();
+        md5CredentialsMatcher.setHashAlgorithmName(ShiroKit.hashAlgorithmName);
+        md5CredentialsMatcher.setHashIterations(ShiroKit.hashIterations);
+        boolean passwordTrueFlag = md5CredentialsMatcher.doCredentialsMatch(
+                usernamePasswordToken, simpleAuthenticationInfo);
+        //密码正确
+        if (passwordTrueFlag) {
+            Laboratory laboratory=laboratoryService.selectById(selectLaboratoryId);
+            laboratory.setIsElectrify(ElectrifyEnum.OPEN.getCode());
+            laboratoryService.updateById(laboratory);
+        } else {
+            throw new ValidateException();
+        }
+
     }
 }

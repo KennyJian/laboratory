@@ -22,8 +22,8 @@ import java.util.Map;
 /**
  * 日志管理的控制器
  *
- * @author fengshuonan
- * @Date 2017年4月5日 19:45:36
+ * @author kenny
+ * @Date
  */
 @Controller
 @RequestMapping("/loginLog")
