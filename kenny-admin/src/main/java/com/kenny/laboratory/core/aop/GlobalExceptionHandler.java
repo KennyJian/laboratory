@@ -154,6 +154,15 @@ public class GlobalExceptionHandler {
         log.error("学生签到次数已达课程数!", e);
         return new ErrorTip(BizExceptionEnum.ATTEDN_MAX.getCode(), BizExceptionEnum.ATTEDN_MAX.getMessage());
     }
+
+    @ExceptionHandler(GradeException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    public ErrorTip grade(GradeException e){
+        HttpKit.getRequest().setAttribute("tip", "未达到评分条件");
+        log.error("未达到评分条件!", e);
+        return new ErrorTip(BizExceptionEnum.GRADE_NOT_ACHIEVE.getCode(), BizExceptionEnum.GRADE_NOT_ACHIEVE.getMessage());
+    }
     /**
      * 拦截未知的运行时异常
      */

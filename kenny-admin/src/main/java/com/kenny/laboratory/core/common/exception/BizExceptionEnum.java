@@ -91,7 +91,9 @@ public enum BizExceptionEnum implements ServiceExceptionEnum {
 
     STUDENT_REPEAT_APPLY(500,"学生重复申请选课"),
 
-    ATTEDN_MAX(500,"学生签到次数已达课程数");
+    ATTEDN_MAX(500,"学生签到次数已达课程数"),
+
+    GRADE_NOT_ACHIEVE(500,"未达到评分条件");
 
     BizExceptionEnum(int code, String message) {
         this.code = code;

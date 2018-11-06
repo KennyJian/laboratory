@@ -1,11 +1,9 @@
 package com.kenny.laboratory.modular.laboratory.service.teacher;
 
-import com.kenny.laboratory.modular.laboratory.dto.teacher.ApplyLaboratoryDTO;
-import com.kenny.laboratory.modular.laboratory.dto.teacher.ApplyLaboratoryDetailDTO;
-import com.kenny.laboratory.modular.laboratory.dto.teacher.AuditingExperimentDTO;
-import com.kenny.laboratory.modular.laboratory.dto.teacher.ExperimentApplyDTO;
+import com.kenny.laboratory.modular.laboratory.dto.teacher.*;
 import com.kenny.laboratory.modular.system.model.ApplyExperiment;
 import com.kenny.laboratory.modular.system.model.ApplyLaboratory;
+import com.kenny.laboratory.modular.system.model.Score;
 
 import java.util.List;
 
@@ -24,4 +22,10 @@ public interface ITeacherService {
     void auditingSuccess(Long applyExperimentId);
 
     void auditingFail(Long applyExperimentId);
+
+    List<TeacherScoreDTO> covertScoreToTeacherScoreDTO(List<Score> scoreList);
+
+    void teacherGrade(Score score);
+
+    boolean isAchieveAttendNum(Score score);
 }

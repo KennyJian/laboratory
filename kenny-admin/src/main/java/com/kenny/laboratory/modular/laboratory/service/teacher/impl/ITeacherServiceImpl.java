@@ -2,10 +2,8 @@ package com.kenny.laboratory.modular.laboratory.service.teacher.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.kenny.laboratory.core.shiro.ShiroKit;
-import com.kenny.laboratory.modular.laboratory.dto.teacher.ApplyLaboratoryDTO;
-import com.kenny.laboratory.modular.laboratory.dto.teacher.ApplyLaboratoryDetailDTO;
-import com.kenny.laboratory.modular.laboratory.dto.teacher.AuditingExperimentDTO;
-import com.kenny.laboratory.modular.laboratory.dto.teacher.ExperimentApplyDTO;
+import com.kenny.laboratory.modular.laboratory.dto.teacher.*;
+import com.kenny.laboratory.modular.laboratory.exception.GradeException;
 import com.kenny.laboratory.modular.laboratory.exception.StudentRepeatApplyException;
 import com.kenny.laboratory.modular.laboratory.labenum.AuditingEnum;
 import com.kenny.laboratory.modular.laboratory.service.IApplyExperimentService;
@@ -191,5 +189,44 @@ public class ITeacherServiceImpl implements ITeacherService {
         scoreEntityWrapper.eq("experiment_id",applyExperiment.getExperimentId());
         scoreService.delete(scoreEntityWrapper);
 
+    }
+
+    @Override
+    public List<TeacherScoreDTO> covertScoreToTeacherScoreDTO(List<Score> scoreList) {
+        List<TeacherScoreDTO> teacherScoreDTOList=new ArrayList<>();
+        for(Score score:scoreList){
+            TeacherScoreDTO teacherScoreDTO=new TeacherScoreDTO();
+            BeanUtils.copyProperties(score,teacherScoreDTO);
+            teacherScoreDTOList.add(teacherScoreDTO);
+        }
+        return teacherScoreDTOList;
+    }
+
+    @Override
+    @Transactional
+    public void teacherGrade(Score score) {
+        //获取选中的成绩记录
+        EntityWrapper<Score> scoreEntityWrapper=new EntityWrapper<>();
+        scoreEntityWrapper.eq("id",score.getId());
+        Score slectScore=scoreService.selectOne(scoreEntityWrapper);
+        //判断是否达到评分条件
+        if(!isAchieveAttendNum(slectScore)){
+            throw new GradeException();
+        }
+        //修改分数
+        slectScore.setScore(score.getScore());
+        scoreService.updateById(slectScore);
+    }
+
+    @Override
+    public boolean isAchieveAttendNum(Score score) {
+        EntityWrapper<Experiment> experimentEntityWrapper=new EntityWrapper<>();
+        experimentEntityWrapper.eq("experiment_id",score.getExperimentId());
+        Experiment experiment=experimentService.selectOne(experimentEntityWrapper);
+        //未达到评分条件
+        if(score.getAttendanceNum()<=(experiment.getCourseNum()*2/3)){
+            return false;
+        }
+        return true;
     }
 }
