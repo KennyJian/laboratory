@@ -84,6 +84,7 @@ public class ITeacherServiceImpl implements ITeacherService {
     }
 
     @Override
+    @Transactional
     public boolean applyLaboratory(ApplyLaboratoryDTO applyLaboratoryDTO) {
         //通过实验id获取实验对象
         Experiment experiment=findExperimentByExperimentId(applyLaboratoryDTO);
@@ -176,12 +177,19 @@ public class ITeacherServiceImpl implements ITeacherService {
     }
 
     @Override
+    @Transactional
     public void auditingFail(Long applyExperimentId) {
-        EntityWrapper<ApplyExperiment> entityWrapper=new EntityWrapper<>();
-        entityWrapper.eq("id",applyExperimentId);
-        ApplyExperiment applyExperiment=applyExperimentService.selectOne(entityWrapper);
+        EntityWrapper<ApplyExperiment> applyExperimentEntityWrapper=new EntityWrapper<>();
+        applyExperimentEntityWrapper.eq("id",applyExperimentId);
+        ApplyExperiment applyExperiment=applyExperimentService.selectOne(applyExperimentEntityWrapper);
         applyExperiment.setStatus(AuditingEnum.FAIL.getCode());
         applyExperimentService.updateById(applyExperiment);
+
+        //删除学生表的信息
+        EntityWrapper<Score> scoreEntityWrapper=new EntityWrapper<>();
+        scoreEntityWrapper.eq("student_id",applyExperiment.getStudentId());
+        scoreEntityWrapper.eq("experiment_id",applyExperiment.getExperimentId());
+        scoreService.delete(scoreEntityWrapper);
 
     }
 }

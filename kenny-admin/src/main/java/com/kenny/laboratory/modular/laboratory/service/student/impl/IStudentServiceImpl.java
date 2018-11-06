@@ -19,6 +19,7 @@ import com.kenny.laboratory.modular.system.model.Score;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -68,6 +69,7 @@ public class IStudentServiceImpl implements IStudentService {
     }
 
     @Override
+    @Transactional
     public void insertToApplyExperiment(String experimentId, String experimentName, String teacherId) {
 
         if(isAuditingSuccess(experimentId)){
@@ -111,6 +113,7 @@ public class IStudentServiceImpl implements IStudentService {
     }
 
     @Override
+    @Transactional
     public void studentAttend(Long scoreId) {
 
         EntityWrapper<Score> scoreEntityWrapper=new EntityWrapper<>();

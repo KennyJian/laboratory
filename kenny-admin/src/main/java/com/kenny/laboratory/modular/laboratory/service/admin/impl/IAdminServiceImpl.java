@@ -18,6 +18,7 @@ import com.kenny.laboratory.modular.system.service.IUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,7 +57,9 @@ public class IAdminServiceImpl implements IAdminService {
         return auditingLaboratoryShowDTOList;
     }
 
+
     @Override
+    @Transactional
     public void auditingSuccess(Long id) {
         //获取实验申请记录对象
         EntityWrapper<ApplyLaboratory> applyLaboratoryEntityWrapper=new EntityWrapper<>();
@@ -101,6 +104,7 @@ public class IAdminServiceImpl implements IAdminService {
     }
 
     @Override
+    @Transactional
     public void auditingFail(Long id) {
         EntityWrapper<ApplyLaboratory> applyLaboratoryEntityWrapper=new EntityWrapper<>();
         applyLaboratoryEntityWrapper.eq("id",id);
