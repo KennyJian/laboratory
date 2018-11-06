@@ -182,5 +182,6 @@ public class ITeacherServiceImpl implements ITeacherService {
         ApplyExperiment applyExperiment=applyExperimentService.selectOne(entityWrapper);
         applyExperiment.setStatus(AuditingEnum.FAIL.getCode());
         applyExperimentService.updateById(applyExperiment);
+
     }
 }

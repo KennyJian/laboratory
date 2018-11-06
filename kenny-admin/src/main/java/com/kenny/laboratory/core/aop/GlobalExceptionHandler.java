@@ -8,10 +8,7 @@ import com.kenny.laboratory.core.support.HttpKit;
 import com.kenny.laboratory.core.base.tips.ErrorTip;
 import com.kenny.laboratory.core.log.LogManager;
 import com.kenny.laboratory.core.shiro.ShiroKit;
-import com.kenny.laboratory.modular.laboratory.exception.ChooseDataException;
-import com.kenny.laboratory.modular.laboratory.exception.EquipmentNotEnoughException;
-import com.kenny.laboratory.modular.laboratory.exception.LaboratoryOccupiedException;
-import com.kenny.laboratory.modular.laboratory.exception.StudentRepeatApplyException;
+import com.kenny.laboratory.modular.laboratory.exception.*;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.CredentialsException;
 import org.apache.shiro.authc.DisabledAccountException;
@@ -148,6 +145,15 @@ public class GlobalExceptionHandler {
         return new ErrorTip(BizExceptionEnum.STUDENT_REPEAT_APPLY.getCode(), BizExceptionEnum.STUDENT_REPEAT_APPLY.getMessage());
     }
 
+
+    @ExceptionHandler(AttendMaxException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    public ErrorTip attendMax(AttendMaxException e){
+        HttpKit.getRequest().setAttribute("tip", "学生签到次数已达课程数");
+        log.error("学生签到次数已达课程数!", e);
+        return new ErrorTip(BizExceptionEnum.ATTEDN_MAX.getCode(), BizExceptionEnum.ATTEDN_MAX.getMessage());
+    }
     /**
      * 拦截未知的运行时异常
      */
