@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * shiro工具类
  *
- * @author dafei, Chill Zhuang
+ * @author kenny
  */
 public class ShiroKit {
 

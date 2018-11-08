@@ -84,19 +84,27 @@ public class IAdminServiceImpl implements IAdminService {
         applyLaboratoryEntityWrapper2.eq("status",1);
         List<ApplyLaboratory> applyLaboratoryList=applyLaboratoryService.selectList(applyLaboratoryEntityWrapper2);
         for(ApplyLaboratory applyLaboratory:applyLaboratoryList){
-            if(applyLaboratoryNow.getApplyBeginTime().equals(applyLaboratory.getApplyBeginTime())||applyLaboratoryNow.getApplyBeginTime().equals(applyLaboratory.getApplyEndTime())){
+            if(applyLaboratoryNow.getApplyBeginTime().equals(applyLaboratory.getApplyBeginTime())||applyLaboratoryNow.getApplyBeginTime().equals(applyLaboratory.getApplyEndTime())||applyLaboratoryNow.getApplyEndTime().equals(applyLaboratory.getApplyBeginTime())||applyLaboratoryNow.getApplyEndTime().equals(applyLaboratory.getApplyEndTime())){
                 throw new LaboratoryOccupiedException();
             }
-            if(applyLaboratoryNow.getApplyEndTime().equals(applyLaboratory.getApplyBeginTime())||applyLaboratoryNow.getApplyEndTime().equals(applyLaboratory.getApplyEndTime())){
+//            if(applyLaboratoryNow.getApplyEndTime().equals(applyLaboratory.getApplyBeginTime())||applyLaboratoryNow.getApplyEndTime().equals(applyLaboratory.getApplyEndTime())){
+//                throw new LaboratoryOccupiedException();
+//            }
+//            if(applyLaboratoryNow.getApplyBeginTime().before(applyLaboratory.getApplyEndTime())&&applyLaboratoryNow.getApplyBeginTime().after(applyLaboratory.getApplyBeginTime())){
+//                throw new LaboratoryOccupiedException();
+//            }
+//            if(applyLaboratoryNow.getApplyEndTime().before(applyLaboratory.getApplyEndTime())&&applyLaboratoryNow.getApplyEndTime().after(applyLaboratory.getApplyBeginTime())){
+//                throw new LaboratoryOccupiedException();
+//            }
+            if((applyLaboratory.getApplyBeginTime().equals(applyLaboratoryNow.getApplyBeginTime())||applyLaboratory.getApplyBeginTime().after(applyLaboratoryNow.getApplyBeginTime()))&&(applyLaboratory.getApplyBeginTime().before(applyLaboratoryNow.getApplyEndTime())||applyLaboratory.getApplyBeginTime().equals(applyLaboratoryNow.getApplyEndTime()))){
                 throw new LaboratoryOccupiedException();
             }
-            if(applyLaboratoryNow.getApplyBeginTime().before(applyLaboratory.getApplyEndTime())&&applyLaboratoryNow.getApplyBeginTime().after(applyLaboratory.getApplyBeginTime())){
+            if(applyLaboratory.getApplyBeginTime().before(applyLaboratoryNow.getApplyEndTime())&&applyLaboratory.getApplyEndTime().after(applyLaboratoryNow.getApplyEndTime())){
                 throw new LaboratoryOccupiedException();
             }
-            if(applyLaboratoryNow.getApplyEndTime().before(applyLaboratory.getApplyEndTime())&&applyLaboratoryNow.getApplyEndTime().after(applyLaboratory.getApplyBeginTime())){
+            if((applyLaboratory.getApplyBeginTime().equals(applyLaboratoryNow.getApplyBeginTime())||applyLaboratory.getApplyBeginTime().before(applyLaboratoryNow.getApplyBeginTime()))&&applyLaboratory.getApplyEndTime().after(applyLaboratoryNow.getApplyBeginTime())){
                 throw new LaboratoryOccupiedException();
             }
-
         }
         //审核成功
         applyLaboratoryNow.setStatus(AuditingEnum.SUCCESS.getCode());
