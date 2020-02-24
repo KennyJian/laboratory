@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author kenny
- * @since 2018-10-11
+ * @since 2020-03-08
  */
 @TableName("sys_relation")
 public class Relation extends Model<Relation> {

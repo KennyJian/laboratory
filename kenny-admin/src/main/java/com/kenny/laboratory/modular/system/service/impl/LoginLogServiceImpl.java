@@ -16,7 +16,7 @@ import java.util.Map;
  * </p>
  *
  * @author kenny
- * @since 2018-02-22
+ * @since 2020-03-08
  */
 @Service
 public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, LoginLog> implements ILoginLogService {

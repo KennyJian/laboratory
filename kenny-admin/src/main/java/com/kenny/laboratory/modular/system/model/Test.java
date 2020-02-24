@@ -10,11 +10,11 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author kenny
- * @since 2018-09-17
+ * @since 2020-03-08
  */
 @TableName("tmp_test")
 public class Test extends Model<Test> {

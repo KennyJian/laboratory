@@ -9,7 +9,7 @@ import com.kenny.laboratory.modular.system.model.Expense;
  * </p>
  *
  * @author kenny
- * @since 2017-12-04
+ * @since 2020-03-08
  */
 public interface ExpenseMapper extends BaseMapper<Expense> {
 

@@ -3,11 +3,11 @@ package com.kenny.laboratory.modular.laboratory.dto.admin;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author kenny
- * @since 2018-11-02
+ * @since 2020-03-08
  */
 public class LaboratoryShowDTO {
 

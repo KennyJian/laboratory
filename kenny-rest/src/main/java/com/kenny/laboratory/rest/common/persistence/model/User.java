@@ -6,11 +6,11 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author kenny
- * @since 2017-08-23
+ * @since 2020-03-08
  */
 public class User extends Model<User> {
 

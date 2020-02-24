@@ -9,7 +9,7 @@ import com.kenny.laboratory.modular.system.model.Relation;
  * </p>
  *
  * @author kenny
- * @since 2018-02-22
+ * @since 2020-03-08
  */
 public interface IRelationService extends IService<Relation> {
 

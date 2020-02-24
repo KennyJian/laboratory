@@ -15,7 +15,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author kenny
- * @since 2018-11-02
+ * @since 2020-03-08
  */
 @TableName("lab_apply_laboratory")
 public class ApplyLaboratory extends Model<ApplyLaboratory> {

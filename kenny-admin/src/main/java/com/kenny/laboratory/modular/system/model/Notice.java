@@ -14,7 +14,7 @@ import java.util.Date;
  * </p>
  *
  * @author kenny
- * @since 2017-07-11
+ * @since 2020-03-08
  */
 @TableName("sys_notice")
 public class Notice extends Model<Notice> {

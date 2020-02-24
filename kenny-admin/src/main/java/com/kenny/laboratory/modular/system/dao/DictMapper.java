@@ -13,7 +13,7 @@ import java.util.Map;
  * </p>
  *
  * @author kenny
- * @since 2017-07-11
+ * @since 2020-03-08
  */
 public interface DictMapper extends BaseMapper<Dict> {
 

@@ -12,7 +12,7 @@ import java.util.Map;
  * </p>
  *
  * @author kenny
- * @since 2018-02-22
+ * @since 2020-03-08
  */
 public interface INoticeService extends IService<Notice> {
 
