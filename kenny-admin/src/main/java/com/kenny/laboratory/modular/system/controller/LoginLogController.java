@@ -46,7 +46,7 @@ public class LoginLogController extends BaseController {
      * 查询登录日志列表
      */
     @RequestMapping("/list")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public Object list(@RequestParam(required = false) String beginTime, @RequestParam(required = false) String endTime, @RequestParam(required = false) String logName) {
         Page<LoginLog> page = new PageFactory<LoginLog>().defaultPage();
@@ -60,7 +60,7 @@ public class LoginLogController extends BaseController {
      */
     @BussinessLog("清空登录日志")
     @RequestMapping("/delLoginLog")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public Object delLog() {
         SqlRunner.db().delete("delete from sys_login_log");
