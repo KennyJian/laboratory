@@ -63,6 +63,10 @@
 									@if(shiro.hasPermission("/mgr/setRole")){
 									<#button name="角色分配" icon="fa-user-secret" clickFun="MgrUser.roleAssign()" space="true"/>
 									@}
+									@if(shiro.hasPermission("/mgr/setRole")){
+									<#button name="批量导入" icon="fa-user-secret" clickFun="MgrUser.trimUploadFile()" space="true"/>
+									@}
+									<input type="file" id="file" onchange="MgrUser.uploadFile()" style="display:none"/>
 								</div>
 								<#table id="managerTable"/>
 							</div>

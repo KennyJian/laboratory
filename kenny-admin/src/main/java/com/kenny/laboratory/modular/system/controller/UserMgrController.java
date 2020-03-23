@@ -1,5 +1,6 @@
 package com.kenny.laboratory.modular.system.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.kenny.laboratory.config.properties.GunsProperties;
 import com.kenny.laboratory.core.common.constant.dictmap.UserDict;
 import com.kenny.laboratory.core.common.constant.factory.ConstantFactory;
@@ -23,6 +24,12 @@ import com.kenny.laboratory.modular.system.dao.UserMapper;
 import com.kenny.laboratory.modular.system.factory.UserFactory;
 import com.kenny.laboratory.modular.system.service.IUserService;
 import com.kenny.laboratory.modular.system.transfer.UserDto;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,10 +40,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.naming.NoPermissionException;
 import javax.validation.Valid;
 import java.io.File;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.*;
 
 /**
  * 系统管理员控制器
@@ -175,7 +181,7 @@ public class UserMgrController extends BaseController {
      */
     @RequestMapping("/add")
     @BussinessLog(value = "添加管理员", key = "account", dict = UserDict.class)
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public Tip add(@Valid UserDto user, BindingResult result) {
         if (result.hasErrors()) {
@@ -354,6 +360,71 @@ public class UserMgrController extends BaseController {
     }
 
     /**
+     * 上传文件
+     */
+    @RequestMapping(method = RequestMethod.POST, path = "/uploadFile")
+    @Permission
+    @ResponseBody
+    public String uploadFile(@RequestPart("file") MultipartFile multipartFile) {
+        String pictureName = UUID.randomUUID().toString() + "." + ToolUtil.getFileSuffix(multipartFile.getOriginalFilename());
+        File file=null;
+        try {
+//            String fileSavePath = gunsProperties.getFileUploadPath();
+            String fileSavePath = "D://";
+//            String fileSavePath = "/home/kenny/temp/";
+            //创建临时文件
+            file = File.createTempFile("Temp",pictureName,new File(fileSavePath));
+            multipartFile.transferTo(file);
+
+            Workbook workbook = WorkbookFactory.create(file);
+            Sheet sheet = workbook.getSheetAt(0);
+            System.out.println(sheet.getFirstRowNum());
+            System.out.println(sheet.getLastRowNum());
+            System.out.println(sheet.getRow(0).getCell(0).toString());
+            for (int i=1;i<=sheet.getLastRowNum();i++){
+                EntityWrapper<User> entityWrapper=new EntityWrapper();
+                User user=new User();
+                user.setAccount(sheet.getRow(i).getCell(0).toString());
+                entityWrapper.setEntity(user);
+                User one = userService.selectOne(entityWrapper);
+                if (one!=null){
+                    System.out.println("存在的是:"+one.toString());
+                    continue;
+                }
+                UserDto userDto=new UserDto();
+                userDto.setAccount(sheet.getRow(i).getCell(0).toString());
+                userDto.setPassword("5045f891363a0b6b13d2c76ea9b7f4ce");
+                userDto.setSalt("mhn02");
+                userDto.setName(sheet.getRow(i).getCell(1).toString());
+                userDto.setBirthday(new Date());
+                if (sheet.getRow(i).getCell(2).toString().equals("男")){
+                    userDto.setSex(1);
+                }else {
+                    userDto.setSex(2);
+                }
+                userDto.setEmail(sheet.getRow(i).getCell(3).toString());
+                userDto.setPhone(new DecimalFormat("0").format(sheet.getRow(i).getCell(4).getNumericCellValue()));
+                if (sheet.getRow(i).getCell(5).toString().equals("学生")){
+                    userDto.setRoleid("8");
+                }else {
+                    userDto.setRoleid("7");
+                }
+
+                userDto.setDeptid(0);
+                userDto.setStatus(1);
+                userDto.setCreatetime(new Date());
+                userService.insert(UserFactory.createUser(userDto));
+            }
+        } catch (Exception e) {
+            file.delete();
+            e.printStackTrace();
+            throw new GunsException(BizExceptionEnum.UPLOAD_ERROR);
+        }
+        file.delete();
+        return multipartFile.getName();
+    }
+
+    /**
      * 判断当前登录的用户是否有操作这个用户的权限
      */
     private void assertAuth(Integer userId) {
@@ -370,4 +441,6 @@ public class UserMgrController extends BaseController {
         }
 
     }
+
+
 }

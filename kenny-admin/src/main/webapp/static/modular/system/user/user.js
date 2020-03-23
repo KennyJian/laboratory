@@ -94,6 +94,46 @@ MgrUser.roleAssign = function () {
 };
 
 /**
+ * 触发上传文件
+ * @param
+ */
+MgrUser.trimUploadFile = function () {
+    $("#file").trigger("click");
+};
+
+/**
+ * 上传文件
+ * @param
+ */
+MgrUser.uploadFile = function () {
+    var doc = document.getElementById('file');
+    for(var i=0;i<doc.files.length;i++){
+        var name = doc.files[i].name;
+        var hz = name.substring(name.lastIndexOf(".")+1);
+        if(hz!="xls" && hz!="xlsx"){
+            Feng.error("请选择正确的文件类型！");
+            return false;
+        }
+    }
+    var formData = new FormData();
+    formData.append("file", doc.files[0]);
+
+    //执行上传
+    $.ajax({
+        url:Feng.ctxPath + '/mgr/uploadFile',
+        type: "post",
+        data: formData,
+        processData: false,
+        contentType: false,
+        cache: false,
+        success: function (data) {
+            Feng.success("导入成功!");
+            MgrUser.table.refresh();
+        },
+    });
+};
+
+/**
  * 删除用户
  */
 MgrUser.delMgrUser = function () {

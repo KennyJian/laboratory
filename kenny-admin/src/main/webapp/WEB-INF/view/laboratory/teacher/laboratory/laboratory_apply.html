@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-sm-6">
                     <#input id="applyBeginTime" name="申请使用时间" underline="true"/>
-                    <#input id="applyEndTime" name="申请结束时间"/>
+                    <#input id="applyEndTime"   name="申请结束时间"/>
                 </div>
             </div>
 
@@ -33,10 +33,16 @@
 <script src="${ctxPath}/static/modular/laboratory/teacher/laboratory/laboratory_info.js"></script>
 <script>
     laydate.render({
-        elem:'#applyBeginTime'
+        elem:'#applyBeginTime',
+        type: 'datetime',
+        min: -0,
+        max: 15
     });
     laydate.render({
-        elem:'#applyEndTime'
+        elem:'#applyEndTime',
+        type: 'datetime',
+        min: -0,
+        max: 15
     });
 </script>
 @}
